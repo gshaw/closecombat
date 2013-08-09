@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Map Maker - CC2 Map Editor</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="NavBar">
+	<tr>
+		<td class="NavBar-Cell">
+			<a title="Home page" href="../index.html"><b>Home</b></a>
+			<img alt="-&gt;" src="../arrow.gif" width="13" height="9"/>
+			Map Maker
+		</td>
+	</tr>
+</table>
+
+<h1>Map Maker - CC2 Map Editor</h1>
+
+<p>This is a work in progress map editor for Close Combat 2. Currently it lets you easily edit the data files for the maps and convert graphics to tga files. In the very near future there will a command line tool that will take your TGA graphic and build the three graphic files needed by close combat. Buildings are not supported at this time.</p>
+<p>There are still some chunks of the puzzle missing to get a map into cc2.</p>
+<ol>
+<li>The ability to create a los file. In the next couple of weeks.</li>
+<li>The ability to create the final cc2 map graphics. You can hack them with a hex editor and my texture converter. All that needs to change is the header. I will be releasing a command line tool that will do this soon.</li>
+<li>The ability to build maps with buildings. I need to work on the roof file format.</li>
+</ol>
+
+<p>Read the readme.txt that comes with the zip file.</p>
+<p>Post feature requests to the Game Stats editing forum (see link on main page)</p>
+
+<p>Download the <a href="https://github.com/gshaw/closecombat/raw/master/bin/mapmaker.zip">executable</a>.</p>
+<p>The source code is missing the routines that read and write TGA files because of some ownership issues.  The code is trivial to implement and requires only changing the Util.cpp file.  If somebody makes theh change send it back here and I'll intergrate it.</p>
+
+<h2>Notes</h2>
+<ol>
+<li>When the program first starts you need to select your CC2 data folder. If you want to use the data of the CD-ROM then point it to E:\data where E: is your CD-ROM drive.</li>
+<li>To open a map, open that map data, not the graphics. For example E:\data\data\maps\map100 would open the Rail Bridge map.</li>
+<li>Left mouse button "paints" with selected tile or elevation.</li>
+<li>Right mouse button lifts the tile and makes it the current tile you "paint" with.</li>
+<li>Tile colors are stored in a file called tilecolor.bin in the current directory (should be the same folder mapmaker.exe is in). If somebody comes up with a good color scheme for tiles send it to me and I'll post it here. To change a tile color select the tile and click the "col" button beside it.</li>
+<li>Hold down space bar to get a hand scroller, very handy for moving around the map quickly.</li>
+</ol>
+
+<h2>Screen Shot</h2>
+<img src="mapmaker.jpg" />
+
+
+</body>
+</html>

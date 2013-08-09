@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>NNT - CC3 Vehicle Graphic Conversion Tool</TITLE>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="NavBar">
+	<tr>
+		<td class="NavBar-Cell">
+			<a title="Home page" href="../index.html"><b>Home</b></a>
+			<img alt="-&gt;" src="../arrow.gif" width="13" height="9"/>
+			NNT
+		</td>
+	</tr>
+</table>
+
+<H1>NNT - CC3 Vehicle Graphic Conversion Tool</H1>
+<H2>Synopsis</H2><p><PRE>	nnt ([-e] filename)|(foldername)</PRE><p>
+<H2>Description</H2><p>
+<p><EM>nnt</EM> is a console tool that
+can be used to convert Close Combat 3 vehicle graphic images to and from TGA
+files.&nbsp; Vehicle graphic files are only present inside the tanks.zfx
+file.&nbsp; A vehicle graphic file can have any one of eight file
+extensions.&nbsp; Each vehicle graphic file contains 17 images.&nbsp; Refer to
+the <A
+href="../formats/nnt.html">file format document</A> for more details.<p>
+<H2>Options</H2><p>
+<p>
+To use <EM>nnt</EM> you must
+specify a CC3 vehicle graphic file name or a folder name containing 17 TGA
+files.&nbsp;</p>
+<p>
+To view the contents of a vehicle graphic file just
+specify the file name.</p>
+<p>
+To extract the images of a vehicle graphic file use -e
+option before the file name.&nbsp; Files will be stored in a sub folder of the
+same name as the file with the . in the extension replaced with an underscore
+chracter.</p>
+<p>
+To rebuild a vehicle graphic file from a folder of 17
+TGA files just specify the folder name.&nbsp; The name of the file will be the
+folder name with the underscore character replaced with a period.</p>
+<p><EM>nnt</EM> will overwrite all
+files without asking so be careful.&nbsp; If you use it how it is designed you
+should have no problems with it.</p>
+<H2>Output Name Format</H2>
+<p>The strange output name format is to make changing those
+two points possible.&nbsp; Since the TGA format does not have space to store 2
+points this really is the only method (even if it did not many paint programs
+let you edit the values).&nbsp; This method makes it very easy to change the
+point values and does not require me to write any tools.</p>
+
+<PRE><b>##_x1_y1_x2_y2.tga</b>
+
+## = image index (zero padded number from 0 to 16
+x1 = x value of the first point
+y1 = y value of the first point
+x2 = x value of the second point
+y2 = y value of the second point</PRE>
+<H2>Examples</H2><p>
+<p>
+To list the contents of the rT34e.nnt file:
+<PRE>C:\games\cc3\Graphics\tanks&gt;nnt rT34e.znt
+ #  Width Height  x1  y1  x2  y2   Offset Output Name
+-- ------ ------ --- --- --- --- -------- -----------
+ 0     23     55  12  39  12  38        0 00_12_39_12_38.tga
+ 1     23     53  12  35  11  38     2530 01_12_35_11_38.tga
+ 2     23     50  11  37  11  39     4968 02_11_37_11_39.tga
+ 3     22     53  11  39  11  39     7268 03_11_39_11_39.tga
+ 4     22     52  11  39  12  39     9600 04_11_39_12_39.tga
+ 5     22     55  12  38  11  39    11888 05_12_38_11_39.tga
+ 6     22     55  11  39  11  39    14308 06_11_39_11_39.tga
+ 7     22     54  11  39  11  38    16728 07_11_39_11_38.tga
+ 8     22     54  11  37  12  39    19104 08_11_37_12_39.tga
+ 9     23     54  12  38  12  35    21480 09_12_38_12_35.tga
+10     23     52  11  38  11  37    23964 10_11_38_11_37.tga
+11     22     54  11  39  11  39    26356 11_11_39_11_39.tga
+12     22     54  11  39  11  39    28732 12_11_39_11_39.tga
+13     22     55  12  39  12  38    31108 13_12_39_12_38.tga
+14     21     55  11  39  11  39    33528 14_11_39_11_39.tga
+15     22     53  11  39  11  39    35838 15_11_39_11_39.tga
+16     22     52  11  38  11  37    38170 16_11_38_11_37.tga</PRE>
+<p>
+To extract the files of the rT34e.nnt file into the
+folder rT34e_nnt:<PRE>	&gt; nnt -e rT34e.nnt
+	Extracting 17 files from rT34e.nnt to rT34e_nnt<BR> </PRE>
+<p>
+To re-create the rT34e.nnt from the rT34e_nnt folder:<PRE>	&gt; nnt rT34e_nnt
+	Creating rT34e.nnt with 17 images from rT34e_nnt </PRE>
+
+<H2>Installation</H2><p>
+<p>Download <A href="https://github.com/gshaw/closecombat/raw/master/bin/nnt.zip">nnt.zip</A> and extract the nnt.exe file into a folder in your path.</p>
+<p>Requires the Microsoft Java Virtual Machine: <A
+href="http://www.microsoft.com/java/">http://www.microsoft.com/java/</A> </p>
+
+</BODY>
+</HTML>

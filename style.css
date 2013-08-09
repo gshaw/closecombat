@@ -1,0 +1,66 @@
+/* modified built in styles */
+
+body {
+	font-family: Georgia, "Times New Roman", Times, "New York", serif;
+	background: white;
+	color: black
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Verdana, Arial, Helvetica, Geneva, SunSans-Regular, sans-serif
+}
+
+h3 { margin-bottom: -18 }
+
+hr {
+	color: gray
+}
+
+input {
+	font-family: Verdana, Arial, Helvetica, Geneva, SunSans-Regular, sans-serif;
+}
+
+a:link		{ color: #0000cc; }
+a:visited	{ color: purple }
+a:active	{ color: #cc0000 }
+a:hover		{ color: #cc0000 }
+
+/*
+
+Because HTML 4.0 strict does not include the border attribute for images we turn it off with a style
+but this totally messes up Navigator 4.7 so we can't use it.
+
+a:link img, a:visited img, a:active img {
+	border: none
+}
+*/
+
+/* have list items flush left against lists in a side bar use this style */
+ul.FlushLeft { 
+	margin-left: 1.25em; 
+	list-style-position: outside
+}	
+
+/* user defined styles */
+
+.color1 { color: #99cc00; } /* green */
+.color2 { color: #ff9900; } /* orange */
+.color3 { color: #cc0000; } /* red */
+
+.NavBar {
+	background-color: #dfff80;
+	border-color: #999966;
+	border-style: none none solid none;
+	border-width: 2px;
+}
+
+.NavBar-Cell {
+	font-family: Verdana, Arial, Helvetica, Geneva, SunSans-Regular, sans-serif;
+	font-size: 79%;
+}
+
+.SideBar {
+	font-size: 80%;
+	font-family: Verdana, Arial, Helvetica, Geneva, SunSans-Regular, sans-serif;
+	padding: 8px;
+}

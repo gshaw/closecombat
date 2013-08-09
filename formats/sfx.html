@@ -1,0 +1,38 @@
+<HTML>
+<HEAD>
+<title>SFX File Format</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="NavBar">
+	<tr>
+		<td class="NavBar-Cell">
+			<a title="Home page" href="../index.html"><b>Home</b></a>
+			<img alt="-&gt;" src="../arrow.gif" width="13" height="9"/>
+			SFX Format
+		</td>
+	</tr>
+</table>
+<H1>SFX File Format</H1>
+<p>This file format is the same as the sounds.cc2 file
+format from CC2. Never did get all the details but here is what I know. The
+cc2hack tool works on these files as well (or at least plays them.. have not
+tried to replace a sound yet).&nbsp; You can get the cc2hack tool by searching for it on GoD's links.</p>
+<PRE>
+<b>// Header (16 bytes)</b>
+int count;     // number of directory entires following this header
+int unknown;
+int pad1;
+int pad2;
+
+<b>// Directory Entry (28 bytes per entry)</b>
+int length;    // length of clip in bytes ?
+int offset;    // offset to sound data from start of file in bytes?
+int u1;
+int rate1;     // playback rate?
+int rate2;     // ??
+int u2;
+int u3;</PRE>
+
+</BODY>
+</HTML>

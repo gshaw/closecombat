@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<title>ZFX File Format</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="NavBar">
+	<tr>
+		<td class="NavBar-Cell">
+			<a title="Home page" href="../index.html"><b>Home</b></a>
+			<img alt="-&gt;" src="../arrow.gif" width="13" height="9"/>
+			ZFX Format
+		</td>
+	</tr>
+</table>
+<H1>ZFX File Format</H1>
+<p>The .zfx file contain a bunch of other files concatenated
+into a single file. This is done to decrease seek times when reading files from
+disk or CD.</p>
+<H4>Basic Format:</H4>
+<UL>
+    <LI>Intel style byte ordering </LI>
+    <LI>File Count (4 byte int) </LI>
+    <LI>Directory (13 byte strings, 0 padded 8.3 format &ndash; always at least
+    one terminating null character, always starts at offset 4, 0 padded to a
+    fixed size of 600 strings - 7800 bytes) </LI>
+    <LI>File Offsets (always starts at 7804, 600 32bit ints) </LI>
+    <LI>Files (always start 12604, offsets are from start of file so this tidbit
+    isn&rsquo;t really needed) </LI></UL>
+<H4>Example of Guns.zfx offset table </H4>
+<PRE>12604
+13648
+14692
+18660
+&hellip;</PRE>
+</BODY>
+</HTML>

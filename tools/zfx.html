@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>ZFX - CC3 File Packer Tool</TITLE>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="NavBar">
+	<tr>
+		<td class="NavBar-Cell">
+			<a title="Home page" href="../index.html"><b>Home</b></a>
+			<img alt="-&gt;" src="../arrow.gif" width="13" height="9"/>
+			ZFX
+		</td>
+	</tr>
+</table>
+
+<H1>ZFX - CC3 File Packer Tool</H1>
+<H2>Synopsis</H2><p><PRE>	zfx ([-e] file.zfx)|folder</PRE><p>
+<H2>Description</H2><p>
+<p><EM>zfx</EM> is a console tool that
+can be used to create and manipulate Close Combat 3 archive (ZFX) files. A ZFX
+file is a non-compressed concatenation of files with an additional
+&quot;manifest&quot;. All files in the the ZFX file must have filenames 12
+characters or less. A ZFX file can have a maximum of 600 files.<p>
+<H2>Options</H2><p>
+<p>
+To use <EM>zfx</EM> you must
+specify the pathname of a ZFX file or a folder.</p><p>
+<p>
+If you specify a ZFX file the contents of that file will
+be displayed by default. If you specify the -e option the contents of that file
+will be extracted to a new folder with the same name as the ZFX minus the the
+.zfx extension.<p>
+<p>
+If you specify a folder a new ZFX file will be created
+(overwriting any existing ZFX file) with name of the folder plus the .zfx
+extension.<p>
+<H2>Examples</H2><p>
+<p>
+To list the contents of the guns.zfx file:
+<PRE>    &gt; zfx guns.zfx
+      # File           Offset     Size
+    --- ------------ -------- --------
+      0 g120MTR.nnh     12604     1044
+      1 g120MTR.nsh     13648     1044
+      2 g120MTR.znh     14692     3968
+      3 g120MTR.zsh     18660     3968
+      4 g37mm.nnh       22628     2076
+      5 g37mm.nsh       24704     2076
+    ...
+    64 files in guns.zfx
+ </PRE>
+<p>
+To extract the files of the guns.zfx file into the
+folder guns:<PRE>    &gt; zfx -e guns.zfx
+    Extracting 64 files from guns.zfx to guns<BR>    ...... </PRE>
+<p>
+To re-create the guns.zfx file from the guns folder:<PRE>    &gt; zfx guns
+    Adding 64 files from guns to guns.zfx
+    ...... </PRE>
+<H2>Installation</H2><p>
+Download <A
+href="https://github.com/gshaw/closecombat/raw/master/bin/zfx.zip">zfx.zip</A> and extract the
+zfx.exe file into a folder in your path.</p><p>
+Requires the Microsoft Java Virtual Machine: <A
+href="http://www.microsoft.com/java/">http://www.microsoft.com/java/</A>
+
+</BODY>
+</HTML>

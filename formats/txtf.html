@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<title>TXTF File Format</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="NavBar">
+	<tr>
+		<td class="NavBar-Cell">
+			<a title="Home page" href="../index.html"><b>Home</b></a>
+			<img alt="-&gt;" src="../arrow.gif" width="13" height="9"/>
+			TXTF Format
+		</td>
+	</tr>
+</table>
+<H1>TXTF File Format</H1>
+<UL>
+    <LI>Used all over the place for images.
+    <LI>Look at the first 4 bytes for 'txtf' to determine
+    if file is a TXTF file.</LI>
+    <LI>Intel style byte ordering .
+    <LI>16 bit rgb pixels (0rrrrrgggggbbbbb) (see Pixel
+    Format below).</LI></UL>
+
+<h2>File Header (26 bytes)</h2>
+<PRE>// txtf header
+int   signature;             // 'txtf'
+int   version;               // TODO: get this value for - always the same
+int   width;                 // width in pixels
+int   height;                // height in pixels
+short type;                  // some type field (Cappy knows but won't tell me :)
+int   hotpointx;             // x value of hotpoint in pixels
+int   hotpointy;             // y value of hotpoint in pixels
+byte image[width*height*2]; // pixel data
+</PRE>
+<h2>Pixel Format</h2>
+<PRE>// PIXEL FORMAT
+//
+// Artwork is stored as 16 bit graphics.  Each component of the pixel is
+// made up of red, green and blue.  Components have a value between 0 and 31
+//
+//
+typedef unsigned short  CC3PIXEL;
+
+// builds a CC3PIXEL from r,g,b where r,g,b are in the range 0..255
+#define CC3PIXEL_RGB255(r255,g255,b255)     (CC3PIXEL)(((r255 &gt;&gt; 3) &lt;&lt; 10) | ((g255 &gt;&gt; 3) &lt;&lt; 5) | ((b255 &gt;&gt; 3)))
+
+// breaks the CC3PIXEL into red,green,blue componentes (values will be 0..31)
+#define CC3PIXEL_R(cc3pixel)    ((cc3pixel&gt;&gt;10)&amp;0x1f)
+#define CC3PIXEL_G(cc3pixel)    ((cc3pixel&gt;&gt;5 )&amp;0x1f)
+#define CC3PIXEL_B(cc3pixel)    ((cc3pixel    )&amp;0x1f)
+
+// same as CC3PIXEL_xxx but scales the values correctly into the range of 0..255
+#define CC3PIXEL_R255(cc3pixel) ((CC3PIXEL_R(cc3pixel) &lt;&lt; 3) | (CC3PIXEL_R(cc3pixel) &gt;&gt; 2))
+#define CC3PIXEL_G255(cc3pixel) ((CC3PIXEL_G(cc3pixel) &lt;&lt; 3) | (CC3PIXEL_G(cc3pixel) &gt;&gt; 2))
+#define CC3PIXEL_B255(cc3pixel) ((CC3PIXEL_B(cc3pixel) &lt;&lt; 3) | (CC3PIXEL_B(cc3pixel) &gt;&gt; 2))</PRE>
+</BODY>
+</HTML>

@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<title>Vehicle Graphics File Format</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="NavBar">
+	<tr>
+		<td class="NavBar-Cell">
+			<a title="Home page" href="../index.html"><b>Home</b></a>
+			<img alt="-&gt;" src="../arrow.gif" width="13" height="9"/>
+			NNT Format
+		</td>
+	</tr>
+</table>
+
+<h1>Vehicle Graphics File Format</h1>
+
+<h2>Overview</h2>
+
+<p>Contains all the images for vehicles. There are a lot of
+images in each file to allow the vehicles to roll and pitch as they move up and
+down hills. In my opinion the effect is not really noticed and good easily be
+dropped by the game. </p>
+
+<p>Vehicle graphic files are only found by extracting the
+images from the tanks.zfx file. See the <a href="..\tools\zfx.html">zfx tool</a> and the <a href="zfx.html">ZFX file
+format</a> for more details on these files.</p>
+<H2>File Contents</H2>
+
+<p>There are always 17 images in each vehicle file.
+Each of the images shows the vehicle/turret at a different pitch and roll.</p>
+
+<PRE><b>image description</b>
+    0 flat and level
+    1 unknown
+    2 unknown
+    3 unknown
+    4 unknown
+    5 unknown
+    6 unknown
+    7 unknown
+    8 unknown
+    9 unknown
+   10 unknown
+   11 unknown
+   12 unknown
+   13 unknown
+   14 unknown
+   15 unknown
+   16 unknown
+   17 unknown</PRE>
+<P>My guesses as to what the images relate to are: </P>
+<UL>
+    <LI>One image for level ground (probally image 0) </LI>
+    <LI>Two images for each tilt/roll, one for a minor tilt, another for a major
+    tilt </LI>
+    <LI>Eight possible directions for tilt/roll (N,S,W,E,NW,NE,SW,SE) </LI></UL>
+<P>Now can somebody look at all the images and figure out which ones are for
+what graphic. </P>
+<P>If you want to add a new vehicle graphic for now all I would do is just copy
+the flat and level graphic to the other 16 slots. You really can't notice
+the tilt and roll that much.</P>
+
+<h2>File Extensions</h2>
+<P>Extensions are in the form: .(n|z)(n|s)(t|h) </P>
+<UL>
+    <LI>First letter indicates normal (n) or zoom (z) image
+    <LI>Second letter indicates UNKNOWN<BR>(in the rT34e vehicle the n was dark green and s was light green,
+    maybe summer/winter?)
+    <LI>Third letter indicates turret (t) or hull (t) image
+    </LI></UL>
+<P>
+<h2>File Types</h2>
+<P>The first byte in the file is the file type. </P>
+<UL>
+    <LI>Indicates what type of images the file holds.
+    <LI>Is very closely related to file extension (see
+    above section) </LI></UL>
+<P>This table indicates what the file type should be for
+the extension of the file (or vice versa, what the extension should be for a
+given file type).</P>
+
+<PRE><b>.ext type description</b>
+.nnh    0 normal N hull
+.nnt    1 normal N turret
+.nsh    2 normal S hull
+.nst    3 normal S turret
+.znh    4 zoomed N hull
+.znt    5 zoomed N turret
+.zsh    6 zoomed S hull
+.zst    7 zoomed S turret</PRE>
+
+<h2>Header Format (484 bytes)</h2>
+<PRE><b> offset    size type       name          description</b>
+      0       4 int        filetype      each extension has a unique type, see above
+      4       4 int        imageDataSize length in bytes of all image data (filesize-484)
+      8     272 int[17][4] pointTable    each image has 2 pointss (x,y) for lining up turret and shadow
+    280     136 int[17][2] sizeTable     w,h in pixels for each image
+    396      68 int[17]    offsetTable   offset from start of image data (image data always starts at offset 484)
+} NntHeader;
+
+</PRE>Image data is stored as 16 bit pixels (0rrrrggggbbbb). See Pixel Format
+below for some simple C code that you can use to pack/unpack these pixels.<p>
+
+The hotpoint is used to align the turret, hull and
+shadow. Here is what happens when you don't do this correctly.<p>
+<P align=center><IMG alt="Example of misplaced hotpoint." src="hotpoint.jpg" width="117" height="96"></P>
+<h2>Pixel Format</h2>
+<PRE>// PIXEL FORMAT
+//
+// Artwork is stored as 16 bit graphics.  Each component of the pixel is
+// made up of red, green and blue.  Components have a value between 0 and 31
+//
+//
+typedef unsigned short  CC3PIXEL;
+
+// builds a CC3PIXEL from r,g,b where r,g,b are in the range 0..255
+#define CC3PIXEL_RGB255(r255,g255,b255)     (CC3PIXEL)(((r255 &gt;&gt; 3) &lt;&lt; 10) | ((g255 &gt;&gt; 3) &lt;&lt; 5) | ((b255 &gt;&gt; 3)))
+
+// breaks the CC3PIXEL into red,green,blue componentes (values will be 0..31)
+#define CC3PIXEL_R(cc3pixel)    ((cc3pixel&gt;&gt;10)&amp;0x1f)
+#define CC3PIXEL_G(cc3pixel)    ((cc3pixel&gt;&gt;5 )&amp;0x1f)
+#define CC3PIXEL_B(cc3pixel)    ((cc3pixel    )&amp;0x1f)
+
+// same as CC3PIXEL_xxx but scales the values correctly into the range of 0..255
+#define CC3PIXEL_R255(cc3pixel) ((CC3PIXEL_R(cc3pixel) &lt;&lt; 3) | (CC3PIXEL_R(cc3pixel) &gt;&gt; 2))
+#define CC3PIXEL_G255(cc3pixel) ((CC3PIXEL_G(cc3pixel) &lt;&lt; 3) | (CC3PIXEL_G(cc3pixel) &gt;&gt; 2))
+#define CC3PIXEL_B255(cc3pixel) ((CC3PIXEL_B(cc3pixel) &lt;&lt; 3) | (CC3PIXEL_B(cc3pixel) &gt;&gt; 2))
+</PRE>
+
+
+</body>
+</html>
