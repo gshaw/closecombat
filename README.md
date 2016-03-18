@@ -1,6 +1,6 @@
 # Tintin's Close Combat Tools
 
-http://gshaw.github.io/closecombat
+http://gshaw.ca/closecombat/
 
 A collection of tools and file formats for modding the Atomic Close Combat
 series of games.
